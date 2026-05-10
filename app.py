@@ -2,20 +2,40 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 import hashlib
 import re
+import os
 from cryptography.fernet import Fernet
 import logging
 
+# ======================
+# APP SETUP
+# ======================
 app = Flask(__name__)
 app.secret_key = "leen_secure_key"
 
-# logging
+# ======================
+# LOGGING
+# ======================
 logging.basicConfig(filename='security.log', level=logging.INFO)
 
-key = Fernet.generate_key()
-cipher_suite = Fernet(key)
+# ======================
+# FERNET KEY (Render Safe)
+# ======================
+key = os.environ.get("FERNET_KEY")
 
-# database
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///tahseel_final.db"
+if not key:
+    raise Exception("FERNET_KEY is missing in Render")
+
+try:
+    cipher_suite = Fernet(key.encode())
+except Exception:
+    raise Exception("Invalid FERNET_KEY format")
+
+# ======================
+# DATABASE (Render Safe)
+# ======================
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/tahseel_final.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
 
 # model
