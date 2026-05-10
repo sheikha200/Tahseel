@@ -33,7 +33,7 @@ print("KEY =", repr(os.environ.get("FERNET_KEY")))
 # ======================
 # DATABASE (Render Safe)
 # ======================
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/tahseel_final.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tahseel_final.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
