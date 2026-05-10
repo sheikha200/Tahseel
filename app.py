@@ -29,7 +29,7 @@ try:
     cipher_suite = Fernet(key.encode())
 except Exception:
     raise Exception("Invalid FERNET_KEY format")
-
+print("KEY =", repr(os.environ.get("FERNET_KEY")))
 # ======================
 # DATABASE (Render Safe)
 # ======================
