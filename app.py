@@ -15,7 +15,7 @@ key = Fernet.generate_key()
 cipher_suite = Fernet(key)
 
 # database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tahseel_final.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = sqlite:////tmp/tahseel_final.db
 db = SQLAlchemy(app)
 
 # model
