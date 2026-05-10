@@ -54,7 +54,7 @@ def hash_password(password):
 
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return "WORKS"
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
